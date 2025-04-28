@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to top, #a0e9fd, #ffffff);
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #333;
+      position: relative;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.3em;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff4d4d68, 0 0 20px #ff4d4d58, 0 0 30px #ff4d4d50;
+      }
+      to {
+        text-shadow: 0 0 20px #ff1a1a55, 0 0 30px #ff1a1a4e, 0 0 40px #ff1a1a51;
+      }
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 2em;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px 0;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: bounce 2s infinite alternate;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #e60000;
+    }
+    .balloon {
+      width: 50px;
+      height: 70px;
+      background: red;
+      border-radius: 50% 50% 45% 45%;
+      position: absolute;
+      animation: float 10s linear infinite;
+    }
+    @keyframes float {
+      0% { bottom: -100px; left: calc(100% * var(--i)); }
+      100% { bottom: 110%; left: calc(100% * var(--i) + 50px); }
+    }
+    .sparkle {
+      width: 5px;
+      height: 5px;
+      background: white;
+      position: absolute;
+      border-radius: 50%;
+      animation: sparkle 3s infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+    .game-icon {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      animation: floatIcon 12s linear infinite;
+    }
+    @keyframes floatIcon {
+      0% { bottom: -50px; left: calc(100% * var(--i)); }
+      100% { bottom: 110%; left: calc(100% * var(--i) + 50px); }
+    }
+    .music-control {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ffffffaa;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .gift-card {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 2s forwards;
+      font-size: 1.5em;
+      color: #ff6600;
+      font-weight: bold;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy 8th Birthday!</h1>
+  <h2>Asher</h2>
+  <img src="/asher8.jpeg" alt="Profile" class="profile-pic">
+  <button onclick="celebrate()">Click Me!</button>
+
+  <button class="music-control" onclick="toggleMusic()">Play Music</button>
+
+  <!-- Gift Card Surprise hidden -->
+  <div id="gift-card" class="gift-card">🎁 You've unlocked a $5 Birthday Reward! 🎉</div>
+
+  <!-- Balloons -->
+  <div class="balloon" style="background: #ff9999; --i:0.1;"></div>
+  <div class="balloon" style="background: #99ccff; --i:0.3;"></div>
+  <div class="balloon" style="background: #ffff99; --i:0.5;"></div>
+  <div class="balloon" style="background: #cc99ff; --i:0.7;"></div>
+
+  <!-- Game icons -->
+  <img src="https://img.icons8.com/color/48/controller.png" class="game-icon" style="--i:0.2;" alt="Controller">
+  <img src="https://img.icons8.com/color/48/nintendo-switch-pro-controller.png" class="game-icon" style="--i:0.6;" alt="Switch Controller">
+
+  <!-- Sparkles -->
+  <div id="sparkles"></div>
+
+  <audio id="bg-music" loop>
+    <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-1160.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function celebrate() {
+      alert('🎉 You are awesome! 🎮 Happy Birthday! 🎉');
+      confettiEffect();
+      document.getElementById('gift-card').style.display = 'block';
+    }
+
+    function confettiEffect() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.position = 'absolute';
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.opacity = 1;
+        confetti.style.transform = 'translateY(0)';
+        confetti.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.style.transform = 'translateY(100vh)';
+          confetti.style.opacity = 0;
+        }, 100);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    function createSparkles() {
+      const sparkleContainer = document.getElementById('sparkles');
+      for (let i = 0; i < 30; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkleContainer.appendChild(sparkle);
+      }
+    }
+
+    createSparkles();
+  </script>
+
+</body>
+</html>
