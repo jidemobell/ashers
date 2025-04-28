@@ -29,10 +29,10 @@
     }
     @keyframes glow {
       from {
-        text-shadow: 0 0 10px #ff4d4d68, 0 0 20px #ff4d4d58, 0 0 30px #ff4d4d50;
+        text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d, 0 0 30px #ff4d4d;
       }
       to {
-        text-shadow: 0 0 20px #ff1a1a55, 0 0 30px #ff1a1a4e, 0 0 40px #ff1a1a51;
+        text-shadow: 0 0 20px #ff1a1a, 0 0 30px #ff1a1a, 0 0 40px #ff1a1a;
       }
     }
     h2 {
@@ -73,11 +73,15 @@
       background: red;
       border-radius: 50% 50% 45% 45%;
       position: absolute;
-      animation: float 10s linear infinite;
+      animation: float 12s linear infinite, spin 6s linear infinite;
     }
     @keyframes float {
-      0% { bottom: -100px; left: calc(100% * var(--i)); }
-      100% { bottom: 110%; left: calc(100% * var(--i) + 50px); }
+      0% { bottom: -100px; }
+      100% { bottom: 110%; }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     .sparkle {
       width: 5px;
@@ -124,20 +128,19 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     .footer {
-  position: absolute;
-  bottom: 10px;
-  font-size: 0.9em;
-  color: #888;
-}
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9em;
+      color: #888;
+    }
   </style>
 </head>
 <body>
 
   <h1>Happy 8th Birthday!</h1>
   <h2>Asher</h2>
-  <img src="/asher8.jpeg" alt="Profile" class="profile-pic">
+  <img src="/asher8.jpeg" alt="Profile Picture" class="profile-pic">
   <button onclick="celebrate()">Click Me!</button>
 
   <button class="music-control" onclick="toggleMusic()">Play Music</button>
@@ -145,15 +148,12 @@
   <!-- Gift Card Surprise hidden -->
   <div id="gift-card" class="gift-card">🎁 You've unlocked a $5 Birthday Reward! 🎉</div>
 
-  <!-- Balloons -->
-  <div class="balloon" style="background: #ff9999; --i:0.1;"></div>
-  <div class="balloon" style="background: #99ccff; --i:0.3;"></div>
-  <div class="balloon" style="background: #ffff99; --i:0.5;"></div>
-  <div class="balloon" style="background: #cc99ff; --i:0.7;"></div>
+  <!-- Balloons dynamically added here -->
+  <div id="balloons"></div>
 
   <!-- Game icons -->
-  <img src="https://img.icons8.com/color/48/controller.png" class="game-icon" style="--i:0.2;" alt="Controller">
-  <img src="https://img.icons8.com/color/48/nintendo-switch-pro-controller.png" class="game-icon" style="--i:0.6;" alt="Switch Controller">
+  <img src="https://img.icons8.com/color/48/controller.png" class="game-icon" style="--i:0.2;">
+  <img src="https://img.icons8.com/color/48/nintendo-switch-pro-controller.png" class="game-icon" style="--i:0.6;">
 
   <!-- Sparkles -->
   <div id="sparkles"></div>
@@ -161,6 +161,8 @@
   <audio id="bg-music" loop>
     <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-1160.mp3" type="audio/mpeg">
   </audio>
+
+  <footer class="footer">Made with ❤️ by Dad</footer>
 
   <script>
     function celebrate() {
@@ -214,9 +216,25 @@
       }
     }
 
+    function createBalloons() {
+  const balloonContainer = document.getElementById('balloons');
+  const colors = ['#ff9999', '#99ccff', '#ffff99', '#cc99ff', '#66ff99', '#ffcc66'];
+  for (let i = 0; i < 20; i++) {
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+    balloon.style.left = `${Math.random() * 100}%`;
+    const floatDuration = 10 + Math.random() * 8; // 10–18s floating
+    const delay = Math.random() * 5; // random 0–5s delay
+    balloon.style.animation = `float ${floatDuration}s linear ${delay}s infinite, spin 6s linear infinite`;
+    balloonContainer.appendChild(balloon);
+  }
+}
+
+
     createSparkles();
+    createBalloons();
   </script>
 
-<footer class="footer">Made with ❤️ by Dad</footer>
 </body>
 </html>
