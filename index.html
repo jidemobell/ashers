@@ -7,172 +7,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://emojiapi.dev/api/v1/birthday-cake/64.png" type="image/png">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: linear-gradient(to top, #a0e9fd, #ffffff);
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #333;
-      position: relative;
-    }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.3em;
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff; }
-      to { text-shadow: 0 0 20px #bbf0ff, 0 0 30px #bbf0ff, 0 0 40px #bbf0ff; }
-    }
-    h2 {
-      margin-top: 0;
-      font-size: 2em;
-    }
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 20px 0;
-      border: 5px solid #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      animation: bounce 2s infinite alternate;
-    }
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-15px); }
-    }
-    .balloon {
-      width: 50px;
-      height: 70px;
-      background: red;
-      border-radius: 50% 50% 45% 45%;
-      position: absolute;
-      animation: float 10s linear forwards;
-      cursor: pointer;
-    }
-    @keyframes float {
-      0% { bottom: -100px; }
-      100% { bottom: 110%; }
-    }
-    .sparkle {
-      width: 5px;
-      height: 5px;
-      background: white;
-      position: absolute;
-      border-radius: 50%;
-      animation: sparkle 3s infinite;
-    }
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.5); }
-    }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.9em;
-      color: #888;
-    }
-    #message, #giftCard {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      font-size: 2em;
-      display: none;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      cursor: pointer;
-    }
-    #giftCard {
-      width: 300px;
-      height: 180px;
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-      color: #333;
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      font-size: 1em;
-      padding: 20px;
-    }
-    #giftCard.show {
-      animation: popBounce 1s ease;
-    }
-    @keyframes popBounce {
-      0% { transform: scale(0.5); opacity: 0; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-    #giftCard h3 {
-      margin: 0;
-      font-size: 2em;
-    }
-    #giftCard p {
-      margin: 5px 0;
-    }
-    #message.fade-out {
-      animation: fadeOut 1s forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    }
-    #counter, #timer {
-      position: absolute;
-      top: 20px;
-      font-size: 1.2em;
-      background: #ffffffaa;
-      padding: 10px;
-      border-radius: 10px;
-    }
+    body { margin: 0; padding: 0; height: 100vh; background: linear-gradient(to top, #a0e9fd, #ffffff); overflow: hidden; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #333; position: relative; }
+    h1 { font-size: 3em; margin-bottom: 0.3em; animation: glow 2s infinite alternate; }
+    @keyframes glow { from { text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff; } to { text-shadow: 0 0 20px #bbf0ff, 0 0 30px #bbf0ff, 0 0 40px #bbf0ff; } }
+    h2 { margin-top: 0; font-size: 2em; }
+    .profile-pic { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 20px 0; border: 5px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,0.3); animation: bounce 2s infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+    .balloon { width: 50px; height: 70px; border-radius: 50% 50% 45% 45%; position: absolute; animation: float 10s linear forwards; cursor: pointer; }
+    .balloon.popped { animation: popSplash 0.5s forwards !important; background: none !important; }
+    @keyframes popSplash { to { transform: scale(0); opacity: 0; } }
+    @keyframes float { 0% { bottom: -100px; } 100% { bottom: 110%; } }
+    .sparkle { width: 5px; height: 5px; background: white; position: absolute; border-radius: 50%; animation: sparkle 3s infinite; }
+    @keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.5); } }
+    .footer { position: absolute; bottom: 10px; font-size: 0.9em; color: #888; }
+    #message, #giftCard { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; display: none; box-shadow: 0 0 20px rgba(0,0,0,0.3); text-align: center; }
+    #message h2 { margin: 0 0 10px; font-size: 2em; }
+    #message p { margin: 5px 0; font-size: 0.9em; color: #888; }
+    #giftCard { width: 300px; height: 180px; background: linear-gradient(135deg, #f5f7fa, #c3cfe2); color: #333; display: none; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); font-size: 1em; padding: 20px; }
+    #giftCard.show { animation: popBounce 1s ease, fadeIn 1s ease; display: flex; }
+    @keyframes popBounce { 0% { transform: scale(0.5); opacity: 0; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    #giftCard h3 { margin: 0; font-size: 2em; }
+    #giftCard p { margin: 5px 0; }
+    #message.fade-out { animation: fadeOut 1s forwards; }
+    @keyframes fadeOut { to { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } }
+    #counter, #timer { position: absolute; top: 20px; font-size: 1.2em; background: #ffffffaa; padding: 10px; border-radius: 10px; }
     #counter { left: 20px; }
     #timer { right: 20px; }
-    #startButton {
-      padding: 15px 30px;
-      font-size: 1.5em;
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    #startButton:hover {
-      background-color: #e60000;
-    }
+    #startButton { padding: 15px 30px; font-size: 1.5em; background-color: #ff4d4d; color: white; border: none; border-radius: 10px; cursor: pointer; margin-top: 20px; }
+    #startButton:hover { background-color: #e60000; }
+    @media (max-width: 600px) { h1 { font-size: 2em; } h2 { font-size: 1.5em; } #message h2 { font-size: 1.5em; } #giftCard { width: 90%; height: auto; padding: 15px; } }
   </style>
 </head>
 <body>
 
-  <h1>Happy 8th Birthday!</h1>
-  <h2>Asher</h2>
-  <img src="/asher8.jpeg" alt="Profile Picture" class="profile-pic">
-
-  <button id="startButton">🎮 Click to Start Your Birthday Game 🎮</button>
-
-  <div id="counter" style="display:none;">Balloons Left: 0</div>
-  <div id="timer" style="display:none;">Time Left: 120s</div>
-  <div id="balloons"></div>
-  <div id="sparkles"></div>
-  <div id="message"></div>
-  <div id="giftCard">
-    <h3>$5 Gift Card</h3>
-    <p>🎁 Happy Birthday, Asher!</p>
-    <p><strong>Code:</strong> BDAY-ASHER-2025</p>
-  </div>
-
-  <footer class="footer">Made with ❤️ by Dad</footer>
+<h1>Happy 8th Birthday!</h1>
+<h2>Asher</h2>
+<img src="/asher8.jpeg" alt="Profile " class="profile-pic">
+<button id="startButton">🎮 Click to Start Your Birthday Game 🎮</button>
+<div id="counter" style="display:none;">Balloons Left: 0</div>
+<div id="timer" style="display:none;">Time Left: 120s</div>
+<div id="balloons"></div>
+<div id="sparkles"></div>
+<div id="message"></div>
+<div id="giftCard">
+  <h3>$5 Gift Card</h3>
+  <p>🎁 Happy Birthday, Asher!</p>
+  <p><strong>Code:</strong> BDAY-ASHER-2025</p>
+</div>
+<footer class="footer">Made with ❤️ by Dad</footer>
 
 <script>
 let gameOver = false;
@@ -206,7 +89,9 @@ function spawnBalloon() {
   const balloon = document.createElement('div');
   balloon.className = 'balloon';
   balloon.style.left = `${Math.random() * 90}%`;
+  balloon.style.background = randomColor();
   balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
+  document.getElementById('balloons').appendChild(balloon);
 
   const checkTop = setInterval(() => {
     if (gameOver) return clearInterval(checkTop);
@@ -219,14 +104,21 @@ function spawnBalloon() {
 
   balloon.onclick = function() {
     clearInterval(checkTop);
-    balloon.remove();
+    balloon.style.animation = 'none';
+    balloon.offsetHeight;
+    balloon.classList.add('popped');
+    setTimeout(() => balloon.remove(), 400);
     balloonsLeft--;
     updateCounter();
   }
 
-  document.getElementById('balloons').appendChild(balloon);
   balloonsLeft++;
   updateCounter();
+}
+
+function randomColor() {
+  const colors = ['#ff9999', '#99ccff', '#ffff99', '#cc99ff', '#66ff99', '#ffcc66'];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 function confettiEffect() {
@@ -259,9 +151,7 @@ function startGame() {
   document.getElementById('counter').style.display = 'block';
   document.getElementById('timer').style.display = 'block';
   confettiEffect();
-
   spawnInterval = setInterval(spawnBalloon, 2000);
-
   countdownInterval = setInterval(() => {
     if (gameOver) return clearInterval(countdownInterval);
     timeLeft--;
@@ -270,10 +160,7 @@ function startGame() {
       clearInterval(countdownInterval);
     }
   }, 1000);
-
-  gameTimer = setTimeout(() => {
-    if (!gameOver) endGame(true);
-  }, 120000);
+  gameTimer = setTimeout(() => { if (!gameOver) endGame(true); }, 120000);
 }
 
 function endGame(win) {
@@ -283,19 +170,20 @@ function endGame(win) {
   clearInterval(countdownInterval);
   document.getElementById('balloons').innerHTML = '';
   const message = document.getElementById('message');
+
   if (win) {
-    message.innerHTML = '🎉 You Win, Birthday Boy! 🎉<br><small>Click to close</small>';
+    message.innerHTML = `<h2>🎉 You Win, Birthday Boy! 🎉</h2><p>Click here to reveal your gift!</p>`;
   } else {
-    message.innerHTML = '💥 Game Over! A Balloon Escaped! 💥<br>🎉 You\'re still a winner, Birthday Boy! 🎉<br><small>Click to close</small>';
+    message.innerHTML = `<h2>💥 Game Over! A Balloon Escaped! 💥</h2><p>🎉 You're still a winner, Birthday Boy! 🎉<br>Click here to reveal your gift!</p>`;
   }
   message.style.display = 'block';
+
   message.onclick = function() {
     message.classList.add('fade-out');
     setTimeout(() => {
       message.style.display = 'none';
       const card = document.getElementById('giftCard');
       card.classList.add('show');
-      card.style.display = 'flex';
     }, 1000);
   }
 }
