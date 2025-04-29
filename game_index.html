@@ -93,6 +93,35 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
       cursor: pointer;
     }
+    #giftCard {
+      width: 300px;
+      height: 180px;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      font-size: 1em;
+      padding: 20px;
+    }
+    #giftCard.show {
+      animation: popBounce 1s ease;
+    }
+    @keyframes popBounce {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    #giftCard h3 {
+      margin: 0;
+      font-size: 2em;
+    }
+    #giftCard p {
+      margin: 5px 0;
+    }
     #message.fade-out {
       animation: fadeOut 1s forwards;
     }
@@ -137,142 +166,143 @@
   <div id="balloons"></div>
   <div id="sparkles"></div>
   <div id="message"></div>
-  <div id="giftCard">🎁 You unlocked a $5 Birthday Gift Card! 🎉</div>
+  <div id="giftCard">
+    <h3>$5 Gift Card</h3>
+    <p>🎁 Happy Birthday, Asher!</p>
+    <p><strong>Code:</strong> BDAY-ASHER-2025</p>
+  </div>
 
   <footer class="footer">Made with ❤️ by Dad</footer>
 
-  <script>
-    let gameOver = false;
-    let gameTimer;
-    let spawnInterval;
-    let countdownInterval;
-    let balloonsLeft = 0;
-    let timeLeft = 120;
+<script>
+let gameOver = false;
+let gameTimer;
+let spawnInterval;
+let countdownInterval;
+let balloonsLeft = 0;
+let timeLeft = 120;
 
-    function updateCounter() {
-      document.getElementById('counter').innerText = `Balloons Left: ${balloonsLeft}`;
+function updateCounter() {
+  document.getElementById('counter').innerText = `Balloons Left: ${balloonsLeft}`;
+}
+
+function updateTimer() {
+  document.getElementById('timer').innerText = `Time Left: ${timeLeft}s`;
+}
+
+function createSparkles() {
+  const sparkleContainer = document.getElementById('sparkles');
+  for (let i = 0; i < 30; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.top = `${Math.random() * 100}%`;
+    sparkle.style.left = `${Math.random() * 100}%`;
+    sparkleContainer.appendChild(sparkle);
+  }
+}
+
+function spawnBalloon() {
+  if (gameOver) return;
+  const balloon = document.createElement('div');
+  balloon.className = 'balloon';
+  balloon.style.left = `${Math.random() * 90}%`;
+  balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
+
+  const checkTop = setInterval(() => {
+    if (gameOver) return clearInterval(checkTop);
+    const rect = balloon.getBoundingClientRect();
+    if (rect.top <= 0) {
+      clearInterval(checkTop);
+      endGame(false);
     }
+  }, 50);
 
-    function updateTimer() {
-      document.getElementById('timer').innerText = `Time Left: ${timeLeft}s`;
-    }
+  balloon.onclick = function() {
+    clearInterval(checkTop);
+    balloon.remove();
+    balloonsLeft--;
+    updateCounter();
+  }
 
-    function createSparkles() {
-      const sparkleContainer = document.getElementById('sparkles');
-      for (let i = 0; i < 30; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.top = `${Math.random() * 100}%`;
-        sparkle.style.left = `${Math.random() * 100}%`;
-        sparkleContainer.appendChild(sparkle);
-      }
-    }
+  document.getElementById('balloons').appendChild(balloon);
+  balloonsLeft++;
+  updateCounter();
+}
 
-    function spawnBalloon() {
-      if (gameOver) return;
-      const balloonContainer = document.getElementById('balloons');
-      const colors = ['#ff9999', '#99ccff', '#ffff99', '#cc99ff', '#66ff99', '#ffcc66'];
-      const balloon = document.createElement('div');
-      balloon.className = 'balloon';
-      balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-      balloon.style.left = `${Math.random() * 90}%`;
-      balloon.style.animationDuration = `${8 + Math.random() * 4}s`;
-      balloon.style.bottom = '-100px';
+function confettiEffect() {
+  for (let i = 0; i < 100; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.width = '8px';
+    confetti.style.height = '8px';
+    confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    confetti.style.position = 'absolute';
+    confetti.style.top = `${Math.random() * 100}%`;
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.opacity = 1;
+    confetti.style.transform = 'translateY(0)';
+    confetti.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
+    document.body.appendChild(confetti);
 
-      const checkTop = setInterval(() => {
-        if (gameOver) return clearInterval(checkTop);
-        const rect = balloon.getBoundingClientRect();
-        if (rect.top <= 0) {
-          clearInterval(checkTop);
-          endGame(false);
-        }
-      }, 50);
+    setTimeout(() => {
+      confetti.style.transform = 'translateY(100vh)';
+      confetti.style.opacity = 0;
+    }, 100);
 
-      balloon.onclick = function() {
-        clearInterval(checkTop);
-        balloon.remove();
-        balloonsLeft--;
-        updateCounter();
-      }
+    setTimeout(() => {
+      confetti.remove();
+    }, 4000);
+  }
+}
 
-      balloonContainer.appendChild(balloon);
-      balloonsLeft++;
-      updateCounter();
-    }
+function startGame() {
+  document.getElementById('startButton').style.display = 'none';
+  document.getElementById('counter').style.display = 'block';
+  document.getElementById('timer').style.display = 'block';
+  confettiEffect();
 
-    function confettiEffect() {
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.width = '8px';
-        confetti.style.height = '8px';
-        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        confetti.style.position = 'absolute';
-        confetti.style.top = `${Math.random() * 100}%`;
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.opacity = 1;
-        confetti.style.transform = 'translateY(0)';
-        confetti.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
-        document.body.appendChild(confetti);
+  spawnInterval = setInterval(spawnBalloon, 2000);
 
-        setTimeout(() => {
-          confetti.style.transform = 'translateY(100vh)';
-          confetti.style.opacity = 0;
-        }, 100);
-
-        setTimeout(() => {
-          confetti.remove();
-        }, 4000);
-      }
-    }
-
-    function startGame() {
-      document.getElementById('startButton').style.display = 'none';
-      document.getElementById('counter').style.display = 'block';
-      document.getElementById('timer').style.display = 'block';
-      confettiEffect();
-
-      spawnInterval = setInterval(spawnBalloon, 2000);
-
-      countdownInterval = setInterval(() => {
-        if (gameOver) return clearInterval(countdownInterval);
-        timeLeft--;
-        updateTimer();
-        if (timeLeft <= 0) {
-          clearInterval(countdownInterval);
-        }
-      }, 1000);
-
-      gameTimer = setTimeout(() => {
-        if (!gameOver) endGame(true);
-      }, 120000);
-    }
-
-    function endGame(win) {
-      gameOver = true;
-      clearInterval(gameTimer);
-      clearInterval(spawnInterval);
+  countdownInterval = setInterval(() => {
+    if (gameOver) return clearInterval(countdownInterval);
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) {
       clearInterval(countdownInterval);
-      document.getElementById('balloons').innerHTML = '';
-      const message = document.getElementById('message');
-      if (win) {
-        message.innerHTML = '🎉 You Win, Birthday Boy! 🎉<br><small>Click to close</small>';
-      } else {
-        message.innerHTML = '💥 Game Over! A Balloon Escaped! 💥<br>🎉 You\'re still a winner, Birthday Boy! 🎉<br><small>Click to close</small>';
-      }
-      message.style.display = 'block';
-      message.onclick = function() {
-        message.classList.add('fade-out');
-        setTimeout(() => {
-          message.style.display = 'none';
-          document.getElementById('giftCard').style.display = 'block';
-        }, 1000);
-      }
     }
+  }, 1000);
 
-    document.getElementById('startButton').onclick = startGame;
+  gameTimer = setTimeout(() => {
+    if (!gameOver) endGame(true);
+  }, 120000);
+}
 
-    createSparkles();
-  </script>
+function endGame(win) {
+  gameOver = true;
+  clearInterval(gameTimer);
+  clearInterval(spawnInterval);
+  clearInterval(countdownInterval);
+  document.getElementById('balloons').innerHTML = '';
+  const message = document.getElementById('message');
+  if (win) {
+    message.innerHTML = '🎉 You Win, Birthday Boy! 🎉<br><small>Click to close</small>';
+  } else {
+    message.innerHTML = '💥 Game Over! A Balloon Escaped! 💥<br>🎉 You\'re still a winner, Birthday Boy! 🎉<br><small>Click to close</small>';
+  }
+  message.style.display = 'block';
+  message.onclick = function() {
+    message.classList.add('fade-out');
+    setTimeout(() => {
+      message.style.display = 'none';
+      const card = document.getElementById('giftCard');
+      card.classList.add('show');
+      card.style.display = 'flex';
+    }, 1000);
+  }
+}
+
+document.getElementById('startButton').onclick = startGame;
+createSparkles();
+</script>
 
 </body>
 </html>
