@@ -80,7 +80,7 @@
       font-size: 0.9em;
       color: #888;
     }
-    #message {
+    #message, #giftCard {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -91,6 +91,13 @@
       font-size: 2em;
       display: none;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    #message.fade-out {
+      animation: fadeOut 1s forwards;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
     }
     #counter, #timer {
       position: absolute;
@@ -130,6 +137,7 @@
   <div id="balloons"></div>
   <div id="sparkles"></div>
   <div id="message"></div>
+  <div id="giftCard">🎁 You unlocked a $5 Birthday Gift Card! 🎉</div>
 
   <footer class="footer">Made with ❤️ by Dad</footer>
 
@@ -247,16 +255,22 @@
       document.getElementById('balloons').innerHTML = '';
       const message = document.getElementById('message');
       if (win) {
-        message.innerText = '🎉 You Win, Birthday Boy! 🎉';
+        message.innerHTML = '🎉 You Win, Birthday Boy! 🎉<br><small>Click to close</small>';
       } else {
-        message.innerHTML = '💥 Game Over! A Balloon Escaped! 💥<br>🎉 You\'re still a winner, Birthday Boy! 🎉';
+        message.innerHTML = '💥 Game Over! A Balloon Escaped! 💥<br>🎉 You\'re still a winner, Birthday Boy! 🎉<br><small>Click to close</small>';
       }
       message.style.display = 'block';
+      message.onclick = function() {
+        message.classList.add('fade-out');
+        setTimeout(() => {
+          message.style.display = 'none';
+          document.getElementById('giftCard').style.display = 'block';
+        }, 1000);
+      }
     }
 
     document.getElementById('startButton').onclick = startGame;
 
-    // create sparkles immediately
     createSparkles();
   </script>
 
