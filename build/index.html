@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Lab — Tic-Tac-Toe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="lab.css" />
+</head>
+<body>
+  <div class="sky">
+    <div class="stars"></div>
+    <div class="aurora"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">🛠️</span>
+      <span class="brand-text">Build Lab</span>
+    </div>
+    <div class="stats">
+      <button id="soundBtn" class="ghost icon-btn" title="Toggle sound" aria-label="Toggle sound">🔊</button>
+      <a class="pill-link pill-link--back" href="../" title="Back to Fox &amp; Lantern">
+        <span class="pill-arrow pill-arrow--back">←</span>
+        <span class="pill-icon">🦊</span>
+        <span class="pill-text">Fox &amp; Lantern</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="lab-main">
+    <section class="intro">
+      <h1>Let's build tic-tac-toe, Asher.</h1>
+      <p class="subtitle">Three steps: <b>play it</b> first, then <b>peek inside</b>, then <b>change the code</b> yourself.</p>
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="play" role="tab">1 · Play</button>
+      <button class="tab" data-tab="peek" role="tab">2 · Peek inside</button>
+      <button class="tab" data-tab="build" role="tab">3 · Build</button>
+    </nav>
+
+    <!-- TAB 1: PLAY -->
+    <section class="panel" data-panel="play">
+      <div class="play-wrap">
+        <div class="board-host" id="playBoard"></div>
+        <div class="play-side">
+          <div class="status" id="playStatus">X to play</div>
+          <button class="ghost" id="playReset">↺ new game</button>
+          <p class="tip">Two players, same laptop. Get three in a row — across, down, or diagonal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PEEK INSIDE -->
+    <section class="panel hidden" data-panel="peek">
+      <div class="peek-wrap">
+        <div class="board-host" id="peekBoard"></div>
+        <aside class="peek-side">
+          <div class="status" id="peekStatus">Click any square — watch the right side light up.</div>
+          <button class="ghost" id="peekReset">↺ reset</button>
+          <h3>How it works</h3>
+          <ol class="peek-list">
+            <li id="peek-1"><b>The board</b> is just a list of 9 squares.<br>
+              <code>let board = [" "," "," "," "," "," "," "," "," "];</code>
+            </li>
+            <li id="peek-2"><b>Whose turn</b> is one variable that flips between X and O.<br>
+              <code>let turn = "X";</code>
+            </li>
+            <li id="peek-3"><b>Click a square</b> → put the letter in that slot.<br>
+              <code>board[i] = turn;</code>
+            </li>
+            <li id="peek-4"><b>Flip the turn</b> for next time.<br>
+              <code>turn = (turn === "X") ? "O" : "X";</code>
+            </li>
+            <li id="peek-5"><b>Check 8 lines</b> — 3 rows, 3 columns, 2 diagonals.<br>
+              <code>if (a === b &amp;&amp; b === c) winner!</code>
+            </li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TAB 3: BUILD -->
+    <section class="panel hidden" data-panel="build">
+      <div class="build-wrap">
+        <div class="build-left">
+          <div class="editor-head">
+            <span>your code · tictactoe.js</span>
+            <span class="editor-actions">
+              <button class="ghost" id="runBtn">▶ run</button>
+              <button class="ghost" id="resetCodeBtn" title="Restore the starter code">↺ reset code</button>
+            </span>
+          </div>
+          <textarea id="editor" spellcheck="false"></textarea>
+          <div class="console" id="console" aria-live="polite"></div>
+        </div>
+        <div class="build-right">
+          <div class="board-host" id="buildBoard"></div>
+          <div class="status" id="buildStatus">Press ▶ run to start.</div>
+          <h3>Challenges</h3>
+          <ul class="challenges" id="challenges">
+            <li data-id="emoji"><span class="check">○</span> Change <code>"X"</code> and <code>"O"</code> to <code>"🦊"</code> and <code>"🦉"</code>.</li>
+            <li data-id="size4"><span class="check">○</span> Make the board <b>4 × 4</b>. (Find <code>SIZE = 3</code> and change it.)</li>
+            <li data-id="glow"><span class="check">○</span> When someone wins, <b>glow</b> the winning line. (Set <code>GLOW = true</code>.)</li>
+            <li data-id="bot"><span class="check">○</span> Add a robot that plays a random square. (Set <code>BOT = true</code>.)</li>
+          </ul>
+          <p class="tip">Tip: change one thing, press <b>▶ run</b>, see what happens. If it breaks — press <b>↺ reset code</b>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../sound.js"></script>
+  <script src="lab.js"></script>
+</body>
+</html>

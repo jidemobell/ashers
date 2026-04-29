@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fox & Lantern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sky">
+    <div class="stars"></div>
+    <div class="aurora"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">🦊</span>
+      <span class="brand-text">Fox &amp; Lantern</span>
+    </div>
+    <div class="stats">
+      <div class="stat" title="Moves this run"><span class="stat-label">moves</span><span id="moves">0</span></div>
+      <div class="stat" title="Treasures recovered"><span class="stat-label">won</span><span id="wins">0</span></div>
+      <div class="stat" title="Daily streak"><span class="stat-label">streak</span><span id="streak">0</span></div>
+      <button id="newRunBtn" class="ghost" title="New run">↺ new run</button>
+      <button id="soundBtn" class="ghost icon-btn" title="Toggle sound" aria-label="Toggle sound">🔊</button>
+      <a class="pill-link lab-link" href="build/" title="Build Lab">
+        <span class="pill-icon">⚡</span>
+        <span class="pill-text">Build Lab</span>
+        <span class="pill-arrow">→</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1 id="greeting">Happy birthday, Asher. Sneak past the owl. Reach the lantern.</h1>
+      <p class="subtitle">Tap a neighbour cell to move. Locked gates ask a question. The owl moves when you do.</p>
+    </section>
+
+    <section class="board-wrap">
+      <div id="board" class="board"></div>
+    </section>
+
+    <section class="hint-strip">
+      <div class="legend-pill"><span class="dot easy"></span>easy gate</div>
+      <div class="legend-pill"><span class="dot medium"></span>medium</div>
+      <div class="legend-pill"><span class="dot hard"></span>hard · shortcut</div>
+      <div class="legend-pill"><span class="hollow"></span>open / solved</div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card with-working">
+      <div class="modal-main">
+        <div class="modal-tag" id="modalTag">Locked gate</div>
+        <h2 id="modalPrompt">…</h2>
+        <form id="answerForm" autocomplete="off">
+          <input id="answerInput" type="text" inputmode="numeric" placeholder="answer" />
+          <button type="submit">Try</button>
+        </form>
+        <div id="modalFeedback" class="feedback"></div>
+        <div class="modal-actions">
+          <button id="showWorkingBtn" class="ghost small">👀 show working</button>
+          <button id="modalCancel" class="ghost small">cancel</button>
+        </div>
+      </div>
+      <aside class="working-board" id="workingBoard" hidden>
+        <div class="working-title">rough work</div>
+        <ol id="workingSteps"></ol>
+        <button id="nextStepBtn" class="ghost small">next step →</button>
+      </aside>
+    </div>
+  </div>
+
+  <div id="endModal" class="modal" aria-hidden="true">
+    <div class="modal-card endcard">
+      <div class="end-emoji" id="endEmoji">🌟</div>
+      <h2 id="endTitle">Lantern recovered!</h2>
+      <p id="endText" class="muted"></p>
+      <button id="endAgain">Play again</button>
+    </div>
+  </div>
+
+  <script src="sound.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

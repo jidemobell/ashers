@@ -1,0 +1,188 @@
+{
+  "config": {
+    "explorerName": "Asher",
+    "gridSize": 5,
+    "fox": [0, 2],
+    "treasure": [4, 2],
+    "owl": [2, 0],
+    "owlMoveEvery": 1,
+    "owlStartDelay": 1,
+    "_comment": "Fox left-middle, lantern right-middle, owl top-middle. owlStartDelay = fox moves before owl wakes. owlMoveEvery = owl moves every N fox moves."
+  },
+  "problems": {
+    "easy": [
+      {
+        "prompt": "47 + 38",
+        "answer": 85,
+        "hint": "Add tens, then ones.",
+        "steps": ["Split: 40 + 7  and  30 + 8.", "Add the tens: 40 + 30 = 70.", "Add the ones: 7 + 8 = 15.", "Put them back: 70 + 15 = 85."]
+      },
+      {
+        "prompt": "82 − 36",
+        "answer": 46,
+        "hint": "Take 30 first, then 6.",
+        "steps": ["Take away 30: 82 − 30 = 52.", "Now take away 6: 52 − 6 = 46."]
+      },
+      {
+        "prompt": "6 × 7",
+        "answer": 42,
+        "hint": "Five sevens then add one more seven.",
+        "steps": ["5 × 7 = 35.", "Add one more 7: 35 + 7 = 42."]
+      },
+      {
+        "prompt": "9 × 4",
+        "answer": 36,
+        "hint": "10 fours minus one four.",
+        "steps": ["10 × 4 = 40.", "Take one 4 off: 40 − 4 = 36."]
+      },
+      {
+        "prompt": "63 + 29",
+        "answer": 92,
+        "hint": "29 is nearly 30.",
+        "steps": ["63 + 30 = 93.", "We added 1 too many. 93 − 1 = 92."]
+      },
+      {
+        "prompt": "100 − 47",
+        "answer": 53,
+        "hint": "What plus 47 makes 100?",
+        "steps": ["From 47, jump to 50: that's 3.", "From 50, jump to 100: that's 50.", "3 + 50 = 53."]
+      },
+      {
+        "prompt": "8 × 6",
+        "answer": 48,
+        "hint": "Double 4 × 6.",
+        "steps": ["4 × 6 = 24.", "Double it: 24 + 24 = 48."]
+      },
+      {
+        "prompt": "56 ÷ 7",
+        "answer": 8,
+        "hint": "How many 7s make 56?",
+        "steps": ["7 × 5 = 35. Not enough.", "7 × 7 = 49. Still not.", "7 × 8 = 56. ✓"]
+      },
+      {
+        "prompt": "75 + 18",
+        "answer": 93,
+        "hint": "Round 18 up to 20.",
+        "steps": ["75 + 20 = 95.", "We added 2 too many. 95 − 2 = 93."]
+      },
+      {
+        "prompt": "11 × 7",
+        "answer": 77,
+        "hint": "Eleven times a digit 1–9: write the digit twice.",
+        "steps": ["Trick for 11 × n where n is 1–9: write n then n.", "n = 7, so the answer is 77."]
+      }
+    ],
+    "medium": [
+      {
+        "prompt": "23 × 4",
+        "answer": 92,
+        "hint": "Split 23 into 20 + 3.",
+        "steps": ["20 × 4 = 80.", "3 × 4 = 12.", "80 + 12 = 92."]
+      },
+      {
+        "prompt": "144 ÷ 12",
+        "answer": 12,
+        "hint": "12 × 12 is a square you might know.",
+        "steps": ["Try 12 × 10 = 120. Not enough.", "Try 12 × 12 = 144. ✓"]
+      },
+      {
+        "prompt": "215 − 78",
+        "answer": 137,
+        "hint": "Round 78 up to 80.",
+        "steps": ["215 − 80 = 135.", "We took 2 too many. Add 2 back: 135 + 2 = 137."]
+      },
+      {
+        "prompt": "18 × 5",
+        "answer": 90,
+        "hint": "×5 = ×10 ÷ 2.",
+        "steps": ["18 × 10 = 180.", "Halve it: 180 ÷ 2 = 90."]
+      },
+      {
+        "prompt": "96 ÷ 8",
+        "answer": 12,
+        "hint": "Split 96 into 80 + 16.",
+        "steps": ["80 ÷ 8 = 10.", "16 ÷ 8 = 2.", "10 + 2 = 12."]
+      },
+      {
+        "prompt": "Half of 246",
+        "answer": 123,
+        "hint": "Halve each chunk.",
+        "steps": ["Half of 200 = 100.", "Half of 40 = 20.", "Half of 6 = 3.", "100 + 20 + 3 = 123."]
+      },
+      {
+        "prompt": "Double 175",
+        "answer": 350,
+        "hint": "Split 175 into 100 + 75.",
+        "steps": ["Double 100 = 200.", "Double 75 = 150.", "200 + 150 = 350."]
+      },
+      {
+        "prompt": "1/4 of 200",
+        "answer": 50,
+        "hint": "A quarter is half of a half.",
+        "steps": ["1/4 of 200 means split 200 into 4 equal parts.", "200 ÷ 4 = ?", "Half of 200 = 100.", "Half of 100 = 50.", "So 1/4 of 200 = 50."]
+      },
+      {
+        "prompt": "What is 7² ?",
+        "answer": 49,
+        "hint": "Seven sevens.",
+        "steps": ["7² means 7 × 7.", "5 × 7 = 35.", "35 + 7 + 7 = 49."]
+      },
+      {
+        "prompt": "303 − 156",
+        "answer": 147,
+        "hint": "Round 156 up to 160.",
+        "steps": ["303 − 160 = 143.", "We took 4 too many. Add 4 back: 143 + 4 = 147."]
+      }
+    ],
+    "hard": [
+      {
+        "prompt": "Double me, add 6, you get 30. What am I?",
+        "answer": 12,
+        "hint": "Work backwards from 30.",
+        "steps": ["Last step was +6, undo it: 30 − 6 = 24.", "Step before was double, undo it: 24 ÷ 2 = 12.", "Check: 12 × 2 = 24, + 6 = 30. ✓"]
+      },
+      {
+        "prompt": "Next: 1, 4, 9, 16, 25, ?",
+        "answer": 36,
+        "hint": "Each one is a number squared.",
+        "steps": ["1 = 1×1, 4 = 2×2, 9 = 3×3, 16 = 4×4, 25 = 5×5.", "Next is 6×6.", "6 × 6 = 36."]
+      },
+      {
+        "prompt": "24 sweets shared between 6 friends. How many each?",
+        "answer": 4,
+        "hint": "Sharing equally = division.",
+        "steps": ["24 ÷ 6 = ?", "6 × 4 = 24. ✓", "Each friend gets 4."]
+      },
+      {
+        "prompt": "A book has 180 pages. You've read 3/5. Pages left?",
+        "answer": 72,
+        "hint": "Find the read pages first.",
+        "steps": ["1/5 of 180 = 180 ÷ 5 = 36.", "3/5 of 180 = 36 × 3 = 108. (read)", "Pages left = 180 − 108 = 72."]
+      },
+      {
+        "prompt": "Next: 2, 6, 12, 20, 30, ?",
+        "answer": 42,
+        "hint": "Look at the gaps.",
+        "steps": ["Gaps: 6−2=4, 12−6=6, 20−12=8, 30−20=10.", "Gaps go 4, 6, 8, 10 — next gap is 12.", "30 + 12 = 42."]
+      },
+      {
+        "prompt": "5 birds on a wire. 3 arrive, 2 fly off. How many now?",
+        "answer": 6,
+        "hint": "Add the arrivals, take off the leavers.",
+        "steps": ["Start: 5.", "+3 arrive: 5 + 3 = 8.", "−2 fly off: 8 − 2 = 6."]
+      },
+      {
+        "prompt": "Train leaves 14:20, arrives 16:05. How many minutes?",
+        "answer": 105,
+        "hint": "Hours first, then minutes.",
+        "steps": ["14:20 → 16:20 is exactly 2 hours = 120 minutes.", "But it arrives at 16:05, which is 15 min earlier.", "120 − 15 = 105 minutes."]
+      },
+      {
+        "prompt": "Triple a number, subtract 5, you get 22. The number?",
+        "answer": 9,
+        "hint": "Work backwards from 22.",
+        "steps": ["Undo subtract 5: 22 + 5 = 27.", "Undo triple: 27 ÷ 3 = 9.", "Check: 9 × 3 = 27, − 5 = 22. ✓"]
+      }
+    ]
+  }
+}
